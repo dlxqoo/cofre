@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>História</title>
+    <!-- Novas fontes do Google -->
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            /* Fundo off-white/gelo, rosa fica só nos detalhes */
+            background-color: #fcfbfb; 
+            font-family: 'Quicksand', sans-serif;
+            color: #555;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 50px 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        header h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 4.5rem;
+            color: #ff1493; /* Rosa forte apenas no título */
+            margin-bottom: 5px;
+        }
+
+        header p {
+            color: #888;
+            font-weight: 600;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+        }
+
+        /* Container dos Cartões */
+        .cards-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            max-width: 900px;
+            margin-bottom: 60px;
+        }
+
+        /* Estrutura do Cartão 3D */
+        .flip-card {
+            background-color: transparent;
+            width: 240px;
+            height: 260px;
+            perspective: 1000px;
+            cursor: pointer;
+        }
+
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform-style: preserve-3d;
+        }
+
+        .flip-card.flipped .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 25px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05); /* Sombra cinza super suave */
+        }
+
+        /* Frente do Cartão */
+        .flip-card-front {
+            background-color: #ffffff;
+            border-bottom: 4px solid #ffb6c1; /* Detalhe rosa clarinho na base */
+        }
+
+        .flip-card-front h2 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.2rem;
+            color: #333;
+        }
+
+        .flip-card-front p {
+            color: #aaa;
+            font-size: 0.9rem;
+            margin-top: 15px;
+        }
+
+        /* Verso do Cartão */
+        .flip-card-back {
+            background-color: #ffffff;
+            color: #444;
+            transform: rotateY(180deg);
+            border: 1px solid #ffb6c1; /* Borda rosa fina */
+        }
+
+        .flip-card-back p {
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        /* Seção da Brincadeira Final */
+        .question-section {
+            text-align: center;
+            background: #fff;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(255, 105, 180, 0.1);
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .question-section h3 {
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            color: #333;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        button {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background-color: #ff69b4;
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);
+        }
+
+        button:hover {
+            background-color: #ff1493;
+            transform: translateY(-2px);
+        }
+
+        /* CSS do Coração Pulsante (Escondido por padrão) */
+        .hidden {
+            display: none;
+        }
+
+        .heart-container {
+            margin-top: 20px;
+            animation: fadeIn 1s ease-in;
+        }
+
+        .heart-container p {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            color: #ff1493;
+            margin-top: 20px;
+        }
+
+        .heart {
+            position: relative;
+            width: 100px;
+            height: 90px;
+            margin: 0 auto;
+            animation: beat 1s infinite;
+        }
+
+        .heart::before, .heart::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            width: 50px;
+            height: 80px;
+            border-radius: 50px 50px 0 0;
+            background: #ff1493;
+        }
+
+        .heart::before {
+            left: 50px;
+            transform: rotate(-45deg);
+            transform-origin: 0 100%;
+        }
+
+        .heart::after {
+            left: 0;
+            transform: rotate(45deg);
+            transform-origin: 100% 100%;
+        }
+
+        @keyframes beat {
+            0% { transform: scale(1); }
+            15% { transform: scale(1.15); }
+            30% { transform: scale(1); }
+            45% { transform: scale(1.15); }
+            60% { transform: scale(1); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Nossa linha do tempo</h1>
+        <p>As duas semanas e meia mais felizes da minha vida</p>
+    </header>
+
+    <div class="cards-container">
+        
+        <!-- Cartão 1 -->
+        <div class="flip-card" onclick="flipCard(this)">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <h2>21/07</h2>
+                    <p></p>
+                </div>
+                <div class="flip-card-back">
+                    <p>Tudo começou com algumas mensagens no Instagram. Um simples "oi", conversas que fluíram naturalmente e a curiosidade de conhecer a mulher incrível por trás da tela.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cartão 2 -->
+        <div class="flip-card" onclick="flipCard(this)">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <h2>29/07</h2>
+                    <p></p>
+                </div>
+                <div class="flip-card-back">
+                    <p>O nosso primeiro encontro! Cinema, Homem-Aranha, Carmed, flores, chocolates e aqueles beijos no carro... Foi aí que eu tive certeza de que a magia era real.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cartão 3 -->
+        <div class="flip-card" onclick="flipCard(this)">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <h2>01/08</h2>
+                    <p></p>
+                </div>
+                <div class="flip-card-back">
+                    <p>O Tijuca que virou Viella com os seus amigos. Foi ali que já marcamos presença como um casal pela primeira vez.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cartão 4 -->
+        <div class="flip-card" onclick="flipCard(this)">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <h2>08/08</h2>
+                    <p></p>
+                </div>
+                <div class="flip-card-back">
+                    <p>Ontem. O dia em que dissemos o "Sim" e oficializamos o nosso namoro. O início oficial de mais um capítulo perfeito da nossa história.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cartão 5: O Futuro -->
+        <div class="flip-card" onclick="flipCard(this)">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <h2>Futuro</h2>
+                    <p></p>
+                </div>
+                <div class="flip-card-back">
+                    <p>O próximo passo? Vamos continuar construindo essa história 💍</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Seção da Brincadeira -->
+    <div class="question-section">
+        <h3 id="questionText">E a pergunta mais importante: vai me aturar pra sempre?</h3>
+        
+        <div class="buttons" id="btnGroup">
+            <button onclick="revealHeart()">Sim</button>
+            <button onclick="revealHeart()">Claro</button>
+        </div>
+
+        <div id="magicHeart" class="heart-container hidden">
+            <div class="heart"></div>
+            <p>Você não vai se arrepender! ❤️</p>
+        </div>
+    </div>
+
+    <script>
+        // Função de virar os cartões
+        function flipCard(element) {
+            element.classList.toggle('flipped');
+        }
+
+        // Função da brincadeira do coração
+        function revealHeart() {
+            // Esconde os botões e a pergunta
+            document.getElementById('btnGroup').style.display = 'none';
+            document.getElementById('questionText').style.display = 'none';
+            
+            // Mostra o coração pulsante
+            document.getElementById('magicHeart').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
