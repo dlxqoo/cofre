@@ -3,336 +3,273 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>História</title>
-    <!-- Novas fontes do Google -->
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+    <title>Cofre... ❤️</title>
+    <!-- Ícones e Fontes fofas -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
     
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        /* --- Cores e Fontes --- */
+        :root {
+            --pink-light: #ffe6f2; /* Fundo da página */
+            --pink-neon: #ff69b4; /* Rosa de destaque */
+            --yellow-soft: #fff3bf; /* Amarelo clarinho */
+            --safe-dark: #2a2a2e; /* Preto/Cinza escuro e suave para o cofre */
+            --font-cute: 'Quicksand', sans-serif;
+            --font-romantic: 'Dancing Script', cursive;
         }
 
         body {
-            /* Fundo off-white/gelo, rosa fica só nos detalhes */
-            background-color: #fcfbfb; 
-            font-family: 'Quicksand', sans-serif;
-            color: #555;
+            margin: 0;
+            font-family: var(--font-cute);
+            background-color: var(--pink-light);
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-            padding: 50px 20px;
-        }
-
-        header {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-
-        header h1 {
-            font-family: 'Dancing Script', cursive;
-            font-size: 4.5rem;
-            color: #ff1493; /* Rosa forte apenas no título */
-            margin-bottom: 5px;
-        }
-
-        header p {
-            color: #888;
-            font-weight: 600;
-            font-size: 1.2rem;
-            letter-spacing: 1px;
-        }
-
-        /* Container dos Cartões */
-        .cards-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 30px;
-            max-width: 900px;
-            margin-bottom: 60px;
-        }
-
-        /* Estrutura do Cartão 3D */
-        .flip-card {
-            background-color: transparent;
-            width: 240px;
-            height: 260px;
-            perspective: 1000px;
-            cursor: pointer;
-        }
-
-        .flip-card-inner {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            text-align: center;
-            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            transform-style: preserve-3d;
-        }
-
-        .flip-card.flipped .flip-card-inner {
-            transform: rotateY(180deg);
-        }
-
-        .flip-card-front, .flip-card-back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
-            border-radius: 15px;
-            display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 25px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05); /* Sombra cinza super suave */
-        }
-
-        /* Frente do Cartão */
-        .flip-card-front {
-            background-color: #ffffff;
-            border-bottom: 4px solid #ffb6c1; /* Detalhe rosa clarinho na base */
-        }
-
-        .flip-card-front h2 {
-            font-family: 'Dancing Script', cursive;
-            font-size: 3.2rem;
+            height: 100vh;
+            overflow: hidden;
             color: #333;
         }
 
-        .flip-card-front p {
-            color: #aaa;
-            font-size: 0.9rem;
-            margin-top: 15px;
-        }
-
-        /* Verso do Cartão */
-        .flip-card-back {
-            background-color: #ffffff;
-            color: #444;
-            transform: rotateY(180deg);
-            border: 1px solid #ffb6c1; /* Borda rosa fina */
-        }
-
-        .flip-card-back p {
-            font-size: 1rem;
-            line-height: 1.6;
-        }
-
-        /* Seção da Brincadeira Final */
-        .question-section {
+        /* --- O Cofre (Tela de Senha) --- */
+        #safe-screen {
+            background-color: var(--safe-dark);
+            color: white;
+            width: 90%;
+            max-width: 450px;
+            padding: 50px 30px;
+            border-radius: 30px;
             text-align: center;
-            background: #fff;
-            padding: 40px;
+            box-shadow: 0 15px 35px rgba(255, 105, 180, 0.2); /* Brilho rosa em volta do cofre */
+            border: 2px solid #444;
+            transition: all 0.5s ease;
+        }
+
+        /* Animação do Cofre sumindo */
+        .fade-out {
+            animation: cofreSumindo 0.8s forwards ease-in-out;
+        }
+
+        @keyframes cofreSumindo {
+            0% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.05); } /* Dá um leve pulinho antes de sumir */
+            100% { opacity: 0; transform: scale(0.8); visibility: hidden; }
+        }
+
+        .lock-icon {
+            font-size: 3.5em;
+            color: var(--yellow-soft);
+            margin-bottom: 15px;
+            text-shadow: 0 0 15px rgba(255, 243, 191, 0.5);
+        }
+
+        #safe-screen h1 {
+            font-family: var(--font-romantic);
+            font-size: 2.5em;
+            color: var(--pink-neon);
+            margin: 0 0 10px;
+            font-weight: 700;
+        }
+
+        .clue {
+            font-size: 1.1em;
+            color: #ccc;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        /* Input de Senha Fofo */
+        #password-input {
+            width: 70%;
+            padding: 15px;
+            font-size: 1.5em;
+            border: 2px solid var(--pink-neon);
             border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(255, 105, 180, 0.1);
-            max-width: 600px;
-            width: 100%;
-        }
-
-        .question-section h3 {
-            font-size: 1.5rem;
-            margin-bottom: 25px;
-            color: #333;
-        }
-
-        .buttons {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
-
-        button {
-            font-family: 'Quicksand', sans-serif;
-            font-size: 1.1rem;
+            text-align: center;
+            font-family: var(--font-cute);
             font-weight: 600;
-            padding: 12px 30px;
+            background-color: #1a1a1c;
+            color: white;
+            outline: none;
+            letter-spacing: 2px;
+            transition: 0.3s;
+        }
+        
+        #password-input:focus {
+            box-shadow: 0 0 15px rgba(255, 105, 180, 0.5);
+        }
+
+        #unlock-btn {
+            background-color: var(--pink-neon);
+            color: white;
             border: none;
-            border-radius: 50px;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            font-family: var(--font-cute);
+            font-weight: 600;
+            border-radius: 20px;
+            margin-top: 20px;
             cursor: pointer;
             transition: all 0.3s ease;
-            background-color: #ff69b4;
-            color: white;
-            box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);
         }
 
-        button:hover {
-            background-color: #ff1493;
-            transform: translateY(-2px);
+        #unlock-btn:hover {
+            background-color: #ff4da6;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
         }
 
-        /* CSS do Coração Pulsante (Escondido por padrão) */
-        .hidden {
+        #error-msg {
+            color: #ff6b6b;
+            font-size: 0.9em;
+            margin-top: 15px;
+            height: 20px;
+            font-weight: 600;
+        }
+
+        /* --- A Carta de Amor --- */
+        #love-letter {
             display: none;
+            background-color: white;
+            width: 90%;
+            max-width: 600px;
+            padding: 50px 40px;
+            border-radius: 25px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+            text-align: center;
+            border: 3px solid var(--yellow-soft);
+            opacity: 0;
         }
 
-        .heart-container {
-            margin-top: 20px;
-            animation: fadeIn 1s ease-in;
+        /* Animação da carta aparecendo */
+        .fade-in {
+            display: block !important;
+            animation: cartaAparecendo 1.2s forwards ease-out;
         }
 
-        .heart-container p {
-            font-family: 'Dancing Script', cursive;
-            font-size: 2.5rem;
-            color: #ff1493;
-            margin-top: 20px;
+        @keyframes cartaAparecendo {
+            0% { opacity: 0; transform: translateY(40px); }
+            100% { opacity: 1; transform: translateY(0); }
         }
 
-        .heart {
-            position: relative;
-            width: 100px;
-            height: 90px;
-            margin: 0 auto;
-            animation: beat 1s infinite;
+        #love-letter h1 {
+            font-family: var(--font-romantic);
+            font-size: 3.5em;
+            color: var(--pink-neon);
+            margin-top: 0;
+            margin-bottom: 20px;
         }
 
-        .heart::before, .heart::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            width: 50px;
-            height: 80px;
-            border-radius: 50px 50px 0 0;
-            background: #ff1493;
+        .letter-content {
+            font-size: 1.2em;
+            line-height: 1.8;
+            text-align: left;
+            color: #444;
         }
 
-        .heart::before {
-            left: 50px;
-            transform: rotate(-45deg);
-            transform-origin: 0 100%;
+        .highlight {
+            color: var(--pink-neon);
+            font-weight: 600;
+        }
+        
+        .yellow-accent {
+            color: #e6c200; /* Amarelo um pouco mais escuro para leitura */
+            font-weight: 600;
         }
 
-        .heart::after {
-            left: 0;
-            transform: rotate(45deg);
-            transform-origin: 100% 100%;
-        }
-
-        @keyframes beat {
-            0% { transform: scale(1); }
-            15% { transform: scale(1.15); }
-            30% { transform: scale(1); }
-            45% { transform: scale(1.15); }
-            60% { transform: scale(1); }
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        .decor {
+            color: var(--yellow-soft);
+            font-size: 2em;
+            margin: 20px 0;
         }
 
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>Nossa linha do tempo</h1>
-        <p>As duas semanas e meia mais felizes da minha vida</p>
-    </header>
-
-    <div class="cards-container">
+    <!-- COFRE (Tela Preta) -->
+    <div id="safe-screen">
+        <i class="fa-solid fa-lock lock-icon"></i>
+        <h1>Cofre do Coração</h1>
         
-        <!-- Cartão 1 -->
-        <div class="flip-card" onclick="flipCard(this)">
-            <div class="flip-card-inner">
-                <div class="flip-card-front">
-                    <h2>21/07</h2>
-                    <p></p>
-                </div>
-                <div class="flip-card-back">
-                    <p>Tudo começou com algumas mensagens no Instagram. Um simples "oi", conversas que fluíram naturalmente e a curiosidade de conhecer a mulher incrível por trás da tela.</p>
-                </div>
-            </div>
-        </div>
+        <!-- Apenas uma dica romântica e simples -->
+        <p class="clue">A senha é o dia em que minha vida ficou mais linda...<br> </p>
 
-        <!-- Cartão 2 -->
-        <div class="flip-card" onclick="flipCard(this)">
-            <div class="flip-card-inner">
-                <div class="flip-card-front">
-                    <h2>29/07</h2>
-                    <p></p>
-                </div>
-                <div class="flip-card-back">
-                    <p>O nosso primeiro encontro! Cinema, Homem-Aranha, Carmed, flores, chocolates e aqueles beijos no carro... Foi aí que eu tive certeza de que a magia era real.</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Cartão 3 -->
-        <div class="flip-card" onclick="flipCard(this)">
-            <div class="flip-card-inner">
-                <div class="flip-card-front">
-                    <h2>01/08</h2>
-                    <p></p>
-                </div>
-                <div class="flip-card-back">
-                    <p>O Tijuca que virou Viella com os seus amigos. Foi ali que já marcamos presença como um casal pela primeira vez.</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Cartão 4 -->
-        <div class="flip-card" onclick="flipCard(this)">
-            <div class="flip-card-inner">
-                <div class="flip-card-front">
-                    <h2>08/08</h2>
-                    <p></p>
-                </div>
-                <div class="flip-card-back">
-                    <p>Ontem. O dia em que dissemos o "Sim" e oficializamos o nosso namoro. O início oficial de mais um capítulo perfeito da nossa história.</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Cartão 5: O Futuro -->
-        <div class="flip-card" onclick="flipCard(this)">
-            <div class="flip-card-inner">
-                <div class="flip-card-front">
-                    <h2>Futuro</h2>
-                    <p></p>
-                </div>
-                <div class="flip-card-back">
-                    <p>O próximo passo? Vamos continuar construindo essa história 💍</p>
-                </div>
-            </div>
-        </div>
-
+        <input type="text" id="password-input" placeholder="00/00" maxlength="5">
+        <br>
+        <button id="unlock-btn" onclick="verificarSenha()">Abrir <i class="fa-solid fa-heart"></i></button>
+        
+        <p id="error-msg"></p>
     </div>
 
-    <!-- Seção da Brincadeira -->
-    <div class="question-section">
-        <h3 id="questionText">E a pergunta mais importante: vai me aturar pra sempre?</h3>
+    <!-- CARTA (Tela Clara) -->
+    <div id="love-letter">
+        <div class="decor"><i class="fa-solid fa-star"></i></div>
         
-        <div class="buttons" id="btnGroup">
-            <button onclick="revealHeart()">Sim</button>
-            <button onclick="revealHeart()">Claro</button>
+        <h1>Para minha Princesa</h1>
+        
+        <div class="letter-content">
+            Desde aquele dia, tudo mudou para melhor. Você trouxe uma luz e uma alegria que eu nem sabia que precisava.
+            <br><br>
+            Você é a mulher mais meiga, incrível e especial que eu poderia ter pedido à vida. Cada detalhe seu faz o meu coração bater mais forte.
+            <br><br>
+            Obrigado por ser o meu porto seguro e a minha maior <span class="highlight">surpresa</span>. 
+            Eu te amo inefavelmente e quero passar cada dia da minha vida ao seu lado.
+            <br><br>
+            Com todo o amor do mundo,<br>
+            <strong>Seu namorado.</strong>
         </div>
-
-        <div id="magicHeart" class="heart-container hidden">
-            <div class="heart"></div>
-            <p>Você não vai se arrepender! ❤️</p>
-        </div>
+        
+        <div class="decor" style="color: var(--pink-neon);"><i class="fa-solid fa-heart"></i></div>
     </div>
 
     <script>
-        // Função de virar os cartões
-        function flipCard(element) {
-            element.classList.toggle('flipped');
+        // Formata automaticamente o campo para colocar a barra (DD/MM)
+        const input = document.getElementById('password-input');
+        input.addEventListener('input', function (e) {
+            let value = e.target.value.replace(/\D/g, ''); // Remove o que não é número
+            if (value.length > 2) {
+                value = value.substring(0, 2) + '/' + value.substring(2, 4);
+            }
+            e.target.value = value;
+        });
+
+        // Função de verificação
+        function verificarSenha() {
+            const senhaDigitada = document.getElementById('password-input').value;
+            const errorMsg = document.getElementById('error-msg');
+            const safeScreen = document.getElementById('safe-screen');
+            const loveLetter = document.getElementById('love-letter');
+
+            if (senhaDigitada === "08/08") {
+                // Remove a mensagem de erro se houver
+                errorMsg.innerHTML = "";
+                
+                // Dispara a animação do cofre sumindo
+                safeScreen.classList.add('fade-out');
+
+                // Espera a animação do cofre terminar (800ms) para mostrar a carta
+                setTimeout(() => {
+                    safeScreen.style.display = 'none'; // Tira o cofre do layout
+                    loveLetter.classList.add('fade-in'); // Faz a carta flutuar para cima
+                }, 800);
+
+            } else {
+                errorMsg.innerHTML = "Senha incorreta, princesa. Tente de novo! 🥺";
+                input.value = "";
+                input.focus();
+            }
         }
 
-        // Função da brincadeira do coração
-        function revealHeart() {
-            // Esconde os botões e a pergunta
-            document.getElementById('btnGroup').style.display = 'none';
-            document.getElementById('questionText').style.display = 'none';
-            
-            // Mostra o coração pulsante
-            document.getElementById('magicHeart').classList.remove('hidden');
-        }
+        // Permite apertar 'Enter'
+        input.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                verificarSenha();
+            }
+        });
     </script>
+
 </body>
 </html>
